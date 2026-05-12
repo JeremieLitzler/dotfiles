@@ -1,0 +1,12 @@
+{{- $osid := "linux" -}}
+{{- if eq .chezmoi.os "windows" -}}
+{{-   $osid = "windows" -}}
+{{- end -}}
+
+[data]
+    osid = {{ $osid | quote }}
+
+[data.protonpass]
+    vaultId = "vBD6igol40j9TgRpoaiYnl2PngDIyS3HmQSWKrN3Bu2Dm6d7iTDXIVX0ltxOXUlBlWwvtiSUSeZyT_lx4svADQ=="
+    gitConfigItemId = "Tpe3Whdy1_ovIox-UrmtyIwGNckNTnIJ3Iv9Nwr0HADWt89gb8ZGc9Z1j6CG7SLw1gL9TjgHIZ-IcYgUbXatOw=="
+    wslItemId = "-7n5Zh8ehoACaVHszmyisRk0RjTk-7gnVz2DuSjudsrT1Ujj5W7vC02VByUnT_29F3OBkBsgRC4jnFqyCv0ZVA=="
