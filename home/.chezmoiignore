@@ -1,0 +1,16 @@
+# .chezmoiignore
+# Files listed here are excluded from chezmoi apply based on OS.
+# Uses the `osid` variable set in .chezmoi.toml.tmpl.
+# Docs: https://www.chezmoi.io/reference/special-files/chezmoiignore/
+
+{{- if eq .osid "windows" }}
+# Linux-only files — ignore on Windows
+.config/mise/config.toml
+{{- end }}
+
+{{- if eq .osid "linux" }}
+# Windows-only files — ignore on Linux
+.claude/CLAUDE.md
+AppData/
+Applications/
+{{- end }}
