@@ -1,0 +1,48 @@
+# run_once_01-scoop-apps.ps1.tmpl
+# Managed by chezmoi — runs once on first apply.
+# Installs scoop buckets, apps, registry entries, and downloads scoop utility scripts.
+
+# --- Scoop buckets ---
+# Note: git is installed by bootstrap.ps1 before chezmoi runs
+scoop bucket add main
+scoop bucket add versions
+scoop bucket add extras
+
+# --- Scoop apps ---
+scoop install main/nodejs-lts
+scoop install main/go
+scoop install main/hugo-extended
+scoop install main/python
+scoop install main/gh
+scoop install main/jq
+scoop install main/claude-code
+scoop install main/7zip
+scoop install extras/mremoteng
+scoop install extras/vscode
+scoop install extras/notepadplusplus
+scoop install extras/vlc
+scoop install extras/draw.io
+scoop install extras/grepwin
+scoop install extras/cryptomator
+scoop install opencode
+scoop install obsidian
+scoop install supabase
+
+# --- Registry imports (context menus, file associations) ---
+reg import "E:\Applications\Scoop\apps\git\current\install-context.reg"
+reg import "E:\Applications\Scoop\apps\git\current\install-file-associations.reg"
+reg import "E:\Applications\Scoop\apps\7zip\current\install-context.reg"
+reg import "E:\Applications\Scoop\apps\vscode\current\install-context.reg"
+reg import "E:\Applications\Scoop\apps\vscode\current\install-associations.reg"
+reg import "E:\Applications\Scoop\apps\notepadplusplus\current\install-context.reg"
+reg import "E:\Applications\Scoop\apps\grepwin\current\install-context.reg"
+reg import "E:\Applications\Scoop\apps\python\current\install-pep-514.reg"
+
+# --- Download scoop utility scripts from gist ---
+New-Item -ItemType Directory -Force -Path 'E:\Applications\Scoop' | Out-Null
+@(
+    'https://gist.githubusercontent.com/JeremieLitzler/d0d66e25ee843697855f1509b6770ed9/raw/d156e0e2f226197e1ea42a6dd726c92eb000072b/scoop-auto-update-apps.ps1'
+    'https://gist.githubusercontent.com/JeremieLitzler/f56bb0b19a950d6ddd2fe8625758b936/raw/37bdd4a58297d8063b79f8a1ebacf6f39d5ea2b4/scoop-batch-cleanup-apps.ps1'
+) | ForEach-Object {
+    Invoke-WebRequest -Uri $_ -OutFile "E:\Applications\Scoop\$(Split-Path $_ -Leaf)"
+}
