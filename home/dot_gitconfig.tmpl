@@ -1,0 +1,69 @@
+# .gitconfig — managed by chezmoi
+# Template: home/dot_gitconfig.tmpl
+# Secrets pulled from Proton Pass "Git Config" item in "Common" vault.
+
+[user]
+    name = {{ protonPass (printf "pass://%s/%s/username" .protonpass.vaultId .protonpass.gitConfigItemId) }}
+    email = {{ protonPass (printf "pass://%s/%s/email" .protonpass.vaultId .protonpass.gitConfigItemId) }}
+
+[init]
+    defaultBranch = main
+
+[core]
+    autocrlf = input
+    editor = code --wait
+
+[push]
+    default = current
+
+[pull]
+    rebase = true
+
+{{- if eq .osid "windows" }}
+
+[credential "helperselector"]
+    selected = manager
+{{- end }}
+
+[alias]
+    # Stage and commit all changes
+    ac = "!git add -A && git commit -m"
+    # Stage, commit, and push
+    acc = "!git add -A && git commit -m \"$1\" && git push #"
+    # List all aliases
+    alias = config --get-regexp ^alias\\.
+    # Soft reset last commit
+    sr = reset --soft HEAD~1
+    # Hard reset last commit
+    hr = reset --hard HEAD~1
+    # Create and switch to new branch
+    cb = checkout -b
+    # Checkout existing branch
+    ct = checkout
+    # Clone
+    c = clone
+    # Rebase production main
+    rpm = "!git fetch origin main && git rebase origin/main"
+    # Merge main
+    mm = "!git fetch origin main && git merge origin/main"
+    # Push
+    pub = push
+    # Pull
+    dev = pull
+    # Build (fetch + status)
+    build = "!git fetch && git status"
+    # Branch verbose
+    bv = branch -v
+    # Test (status)
+    t = status
+    # Test porcelain
+    tp = status --porcelain
+    # Pretty log
+    pp = log --oneline --graph --decorate -20
+{{- if eq .osid "windows" }}
+    # Open gitconfig in editor (Windows: notepad++)
+    conf = "!start notepad++ \"$HOME/.gitconfig\""
+{{- else }}
+    # Open gitconfig in editor (Linux: $EDITOR)
+    conf = "!${EDITOR:-vi} \"$HOME/.gitconfig\""
+{{- end }}
