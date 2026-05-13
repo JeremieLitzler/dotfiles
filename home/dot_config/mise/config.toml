@@ -1,3 +1,7 @@
+# Mise global tool versions — single source of truth.
+# Managed by chezmoi → placed at ~/.config/mise/config.toml
+# Bump versions here, then run `chezmoi apply` to trigger run_onchange_02-mise-tools.sh
+
 [tools]
 node = "lts"
 python = "latest"
