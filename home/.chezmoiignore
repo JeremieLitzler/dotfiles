@@ -6,6 +6,7 @@
 {{- if eq .osid "windows" }}
 # Linux-only files — ignore on Windows
 .config/mise/config.toml
+.local/bin/update.sh
 {{- end }}
 
 {{- if eq .osid "linux" }}
@@ -13,4 +14,5 @@
 .claude/CLAUDE.md
 AppData/
 Applications/
+.local/bin/update.ps1
 {{- end }}
