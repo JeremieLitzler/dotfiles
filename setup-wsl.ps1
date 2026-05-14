@@ -7,10 +7,11 @@
 $ubuntuPath = 'E:\WSL\Ubuntu'
 $exportPath = 'E:\WSL\Ubuntu-export.tar'
 
-# --- Step 1: Enable WSL feature ---
-$wslFeature = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-if ($wslFeature.State -ne 'Enabled') {
-    Write-Host "Enabling WSL feature..." -ForegroundColor Cyan
+# --- Step 1: Enable WSL (modern Windows 11 installs WSL as a platform component,
+#     not the legacy optional feature, so test wsl --version instead) ---
+wsl --version 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Installing WSL..." -ForegroundColor Cyan
     wsl --install --no-distribution
     Write-Host ""
     Write-Host "==========================================" -ForegroundColor Yellow
@@ -18,11 +19,11 @@ if ($wslFeature.State -ne 'Enabled') {
     Write-Host "==========================================" -ForegroundColor Yellow
     exit 0
 }
-Write-Host "WSL feature already enabled." -ForegroundColor Green
+Write-Host "WSL already installed." -ForegroundColor Green
 
 # --- Step 2: Install Ubuntu ---
-$installed = wsl -l -q 2>$null | Where-Object { $_ -match 'Ubuntu' }
-if (-not $installed) {
+wsl -d Ubuntu -- true 2>$null
+if ($LASTEXITCODE -ne 0) {
     Write-Host "Installing Ubuntu..." -ForegroundColor Cyan
     wsl --install Ubuntu
     Write-Host ""
@@ -36,8 +37,7 @@ if (-not $installed) {
 Write-Host "Ubuntu already installed." -ForegroundColor Green
 
 # --- Step 3: Relocate to E:\WSL\Ubuntu ---
-$wslOutput = wsl -l -v 2>$null
-if ($wslOutput -match 'Ubuntu' -and (Test-Path $ubuntuPath)) {
+if ((Test-Path $ubuntuPath) -and (Get-ChildItem $ubuntuPath -ErrorAction SilentlyContinue)) {
     Write-Host "Ubuntu already relocated to $ubuntuPath." -ForegroundColor Green
 } else {
     Write-Host "Relocating Ubuntu to $ubuntuPath..." -ForegroundColor Cyan
@@ -52,8 +52,9 @@ if ($wslOutput -match 'Ubuntu' -and (Test-Path $ubuntuPath)) {
     wsl --unregister Ubuntu
     wsl --import Ubuntu $ubuntuPath $exportPath
 
-    # Restore default user
-    ubuntu config --default-user $defaultUser
+    # Restore default user via wsl.conf (ubuntu.exe not available with wsl --install)
+    wsl -d Ubuntu -u root -- bash -c "printf '[user]\ndefault=$defaultUser\n' > /etc/wsl.conf"
+    wsl --terminate Ubuntu
 
     Remove-Item $exportPath -ErrorAction SilentlyContinue
     Write-Host "Ubuntu relocated to $ubuntuPath." -ForegroundColor Green
