@@ -1,4 +1,4 @@
-# Phase 5: Standalone idempotent WSL installer.
+# setup-wsl.ps1 — Phase 5: Standalone idempotent WSL installer.
 # Run from PowerShell as Administrator:
 #   .\setup-wsl.ps1
 # Safe to re-run — checks state at each step and resumes from where it left off.
@@ -6,20 +6,6 @@
 
 $ubuntuPath = 'E:\WSL\Ubuntu'
 $exportPath = 'E:\WSL\Ubuntu-export.tar'
-
-# --- Pre-check: Proton Pass CLI ---
-if (-not (Get-Command pass-cli -ErrorAction SilentlyContinue)) {
-    Write-Host "pass-cli not found. Install it first:" -ForegroundColor Red
-    Write-Host "  Invoke-WebRequest -Uri https://proton.me/download/pass-cli/install.ps1 -OutFile install.ps1; .\install.ps1" -ForegroundColor Yellow
-    exit 1
-}
-
-$passCheck = pass-cli info 2>&1
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "pass-cli not logged in. Run 'pass-cli login' first." -ForegroundColor Red
-    exit 1
-}
-Write-Host "pass-cli authenticated." -ForegroundColor Green
 
 # --- Step 1: Enable WSL feature ---
 $wslFeature = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
@@ -56,8 +42,9 @@ if ($wslOutput -match 'Ubuntu' -and (Test-Path $ubuntuPath)) {
 } else {
     Write-Host "Relocating Ubuntu to $ubuntuPath..." -ForegroundColor Cyan
 
-    # Get the default username from Proton Pass
-    $defaultUser = pass-cli item view "pass://vBD6igol40j9TgRpoaiYnl2PngDIyS3HmQSWKrN3Bu2Dm6d7iTDXIVX0ltxOXUlBlWwvtiSUSeZyT_lx4svADQ==/-7n5Zh8ehoACaVHszmyisRk0RjTk-7gnVz2DuSjudsrT1Ujj5W7vC02VByUnT_29F3OBkBsgRC4jnFqyCv0ZVA==/Username"    if (-not $defaultUser) { $defaultUser = Read-Host "Enter WSL Ubuntu username" }
+    # Get the default username before export
+    $defaultUser = wsl -d Ubuntu -- whoami 2>$null
+    if (-not $defaultUser) { $defaultUser = Read-Host "Enter WSL Ubuntu username" }
 
     New-Item -ItemType Directory -Force -Path $ubuntuPath | Out-Null
 
@@ -66,4 +53,17 @@ if ($wslOutput -match 'Ubuntu' -and (Test-Path $ubuntuPath)) {
     wsl --import Ubuntu $ubuntuPath $exportPath
 
     # Restore default user
-    ubuntu config --default-user $
+    ubuntu config --default-user $defaultUser
+
+    Remove-Item $exportPath -ErrorAction SilentlyContinue
+    Write-Host "Ubuntu relocated to $ubuntuPath." -ForegroundColor Green
+}
+
+# --- Step 4: Verify ---
+Write-Host ""
+Write-Host "=== Verification ===" -ForegroundColor Cyan
+wsl -l -v
+Write-Host ""
+Write-Host "==========================================" -ForegroundColor Green
+Write-Host "  WSL ready. Open Ubuntu and run Phase 6." -ForegroundColor Green
+Write-Host "==========================================" -ForegroundColor Green
