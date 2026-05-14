@@ -5,6 +5,9 @@
 #   irm https://raw.githubusercontent.com/JeremieLitzler/dotfiles/main/bootstrap.ps1 | iex
 
 # --- Install Scoop to E:\Applications\Scoop ---
+if (Test-Path "E:\Applications\Scoop") {
+    Remove-Item "E:\Applications\Scoop" -Recurse -Force
+}
 if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
     E:
     cd .\Applications\
