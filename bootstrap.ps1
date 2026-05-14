@@ -6,6 +6,8 @@
 
 # --- Install Scoop to E:\Applications\Scoop ---
 if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
+    E:
+    cd .\Applications\
     irm get.scoop.sh -OutFile install-scoop.ps1
     .\install-scoop.ps1 -ScoopDir 'E:\Applications\Scoop' -NoProxy
     Remove-Item install-scoop.ps1 -ErrorAction SilentlyContinue
