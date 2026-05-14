@@ -14,6 +14,7 @@ $currentPath = [Environment]::GetEnvironmentVariable('Path', 'User')
 $additions = @(
     "$env:USERPROFILE\.local\bin"
     'E:\rtk\bin'
+    'E:\Applications\Scoop\apps\git\current\bin'
 )
 
 foreach ($dir in $additions) {
