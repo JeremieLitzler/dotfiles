@@ -58,8 +58,8 @@ fi
 
 # --- 3. discover this session's transcript from the current cwd ------------
 # Encode the Windows cwd the way Claude Code names the transcript dir:
-# every : / \ . becomes -
-dir="$HOME/.claude/projects/$(pwd -W | sed 's#[:/\\.]#-#g')"
+# every : / \ . _ becomes -
+dir="$HOME/.claude/projects/$(pwd -W | sed 's#[:/\\._]#-#g')"
 transcript=$(ls -t "$dir"/*.jsonl 2>/dev/null | head -1)
 
 if [ -z "${transcript:-}" ]; then
