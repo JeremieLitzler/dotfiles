@@ -1,0 +1,11 @@
+{
+  "model": "opus",
+  "permissions": {
+    "allow": [
+      "Bash(bash ~/.claude/skills/save-session/scripts/save-session.sh *)"
+    ]
+  },
+  "autoUpdatesChannel": "latest",
+  "theme": "dark-daltonized",
+  "awaySummaryEnabled": false
+}
