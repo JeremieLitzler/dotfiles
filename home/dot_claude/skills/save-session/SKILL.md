@@ -29,7 +29,7 @@ slug derived from a title for the session.
    ```
 
    - The script locates the `my-claude-conversations` clone under
-     `D:/Git/GitHub` or `E:/Git/GitHub`, and **clones it there if
+     `D:/Git/GitHub` or `E:/Git/GitHub` (preferred), and **clones it there if
      it is missing**.
    - It encodes the current dir the way Claude Code names its transcript folder
      (`~/.claude/projects/<encoded-cwd>/`, every `:` `/` `\` `.` → `-`), picks
