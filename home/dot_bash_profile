@@ -1,0 +1,3 @@
+alias claude-conversation='code /e/Git/GitHub/my-claude-conversations'
+alias blog-fr='code /e/Git/GitHub/jeremielitzler.fr-with-hugo-theme-stack'
+alias blog-en='code /e/Git/GitHub/iamjeremie.me-with-hugo-theme-stack'
