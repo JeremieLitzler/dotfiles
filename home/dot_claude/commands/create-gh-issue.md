@@ -1,36 +1,34 @@
 Create one or more GitHub issues on the current repo from a `tasks/` file path or from a plain description typed by the user.
 
 **Rules:**
-- Every issue must have a single, focused responsibility (one thing to change or decide).
+
+- Every issue must have a single, focused responsibility (one thing to change or decide). Let human find out it doesn't waste your time and his.
 - Issues must be linked: list blocking issues in the body of each dependent issue (`Depends on #N`).
 - Create blocking issues first so their numbers are available when writing dependents.
 - Never create an issue that duplicates an already-open one — check with `rtk gh issue list` first.
 
----
-
 ## Step 1 — Identify the source
 
 If the user passed a file path (e.g. `tasks/2026-04-23-web-ui-ifu-vercel.md`):
+
 - Read the file with the Read tool.
 - Use "Files to modify" and "Verification steps" as the raw material.
 
 If the user passed a free-text description:
+
 - Use it directly as the raw material.
 
-If the source is ambiguous, ask before proceeding.
-
----
+If the source is ambiguous or in doubt, ask before proceeding.
 
 ## Step 2 — Check existing issues
 
 Run:
+
 ```bash
 rtk gh issue list --state open --limit 50
 ```
 
 Note any issues that overlap with the planned work. Skip duplicates.
-
----
 
 ## Step 3 — Decompose into issues
 
@@ -42,6 +40,7 @@ From the raw material, derive a flat list of small issues. Apply these decomposi
 - **Refactors that are prerequisites** for other issues must be separate issues placed before their dependents.
 
 For each issue, note:
+
 - `title` — imperative sentence, ≤ 72 chars (e.g. "Refactor yuh_csv_ifu.py to expose process() function")
 - `body` — 3–6 bullet points describing exactly what changes; end with a `Depends on` line if applicable
 - `labels` — pick from: `enhancement`, `bug`, `refactor`, `ci`, `docs`, `infra` (use only labels that already exist or are clearly standard)
@@ -56,6 +55,7 @@ Show the full planned list to the user and ask for confirmation before creating 
 Sort issues: issues with no dependencies first, then issues that depend on already-created ones.
 
 For each issue, run:
+
 ```bash
 rtk gh issue create \
   --title "<title>" \
@@ -75,8 +75,8 @@ After each creation, record the issue number from the output URL (the trailing i
 
 Print a table:
 
-| # | Title | Depends on |
-|---|-------|-----------|
-| N | ...   | #X, #Y    |
+| #   | Title | Depends on |
+| --- | ----- | ---------- |
+| N   | ...   | #X, #Y     |
 
 End with the total count and the repo URL for the issues list.

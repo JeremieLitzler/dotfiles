@@ -4,8 +4,6 @@ Create a pull request from the current branch, evaluate its contents, and merge 
 
 Aborts if the current branch is `main`.
 
----
-
 ## Step 1 — Verify branch
 
 Run:
@@ -16,9 +14,7 @@ rtk git status
 
 If the current branch is `main`, stop and tell the user: "Already on main — check out a feature branch first."
 
----
-
-## Step 2 — Evaluate commits on this branch
+## Step 2 — Evaluate commits
 
 Run in parallel:
 
@@ -35,7 +31,7 @@ From these, extract:
 
 Present the evaluation to the user in this format:
 
-```
+```plaintext
 Branch: <branch-name>
 Commits (<N>):
   - <subject>
@@ -48,19 +44,11 @@ Files changed:
 Summary: <one-sentence purpose>
 ```
 
----
+## Step 3 — Human review: pre-check PR to create
 
-## Step 2b — Human review: evaluation
+Wait for explicit approval or corrections before proceeding to Step 4. Apply any changes the user requests to the draft title/body.
 
-Ask the user:
-
-> "Does this evaluation look correct? Anything to adjust in the PR title or description before I create it?"
-
-Wait for explicit approval or corrections before proceeding to Step 3. Apply any changes the user requests to the draft title/body.
-
----
-
-## Step 3 — Create the pull request
+## Step 4 — Create the pull request
 
 Derive a PR title from the branch commits (use the evaluation summary if a single-commit branch, otherwise synthesize from all subjects).
 
@@ -90,19 +78,11 @@ EOF
 
 Report the PR URL to the user.
 
----
+## Step 5 — Human review: PR
 
-## Step 3b — Human review: PR
+Wait for explicit approval before proceeding to Step 6. If the user requests changes to the PR description or needs additional commits, apply them and repeat this step.
 
-Show the PR URL and the rendered summary. Ask the user:
-
-> "Does the PR look good? Ready to merge into main?"
-
-Wait for explicit approval before proceeding to Step 4. If the user requests changes to the PR description or needs additional commits, apply them and repeat this step.
-
----
-
-## Step 4 — Merge and sync local main
+## Step 6 — Merge and sync local main
 
 Run:
 

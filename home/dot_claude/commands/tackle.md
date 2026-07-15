@@ -137,13 +137,13 @@ Where strict compliance conflicts with Python conventions (e.g. `__init__`, `@pr
 
 When running shell commands during implementation or testing, prefer `rtk` equivalents:
 
-| Instead of          | Use                   |
-| ------------------- | --------------------- |
-| `ls <path>`         | `rtk ls <path>`       |
-| `cat/head/tail <f>` | `rtk read <f>`        |
-| `grep/rg <pattern>` | `rtk grep <pattern>`  |
-| `git …`             | `rtk git …`           |
-| `gh …`              | `rtk gh …`            |
+| Instead of          | Use                  |
+| ------------------- | -------------------- |
+| `ls <path>`         | `rtk ls <path>`      |
+| `cat/head/tail <f>` | `rtk read <f>`       |
+| `grep/rg <pattern>` | `rtk grep <pattern>` |
+| `git …`             | `rtk git …`          |
+| `gh …`              | `rtk gh …`           |
 
 Prefer the dedicated Read / Glob / Grep tools over shell commands when available.
 
