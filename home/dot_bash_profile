@@ -1,11 +1,13 @@
 # Open projects
 alias code-claude-conversation='code /e/Git/GitHub/my-claude-conversations'
+alias code-blog-fr='code /e/Git/GitHub/jeremielitzler.fr-with-hugo-theme-stack'
+alias code-blog-en='code /e/Git/GitHub/iamjeremie.me-with-hugo-theme-stack'
 
 # Cd to directory
 alias cd-home='cd ~'
 alias cd-claude-conversation='cd /e/Git/GitHub/my-claude-conversations'
-alias cd-blog-fr='code /e/Git/GitHub/jeremielitzler.fr-with-hugo-theme-stack'
-alias cd-blog-en='code /e/Git/GitHub/iamjeremie.me-with-hugo-theme-stack'
+alias cd-blog-fr='cd /e/Git/GitHub/jeremielitzler.fr-with-hugo-theme-stack'
+alias cd-blog-en='cd /e/Git/GitHub/iamjeremie.me-with-hugo-theme-stack'
 alias cd-github='cd /e/Git/GitHub'
 
 # Alias for tools
