@@ -11,3 +11,4 @@ fi
 if ! grep -q 'mise activate bash' ~/.bashrc; then
     echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
 fi
+
