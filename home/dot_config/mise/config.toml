@@ -4,6 +4,11 @@
 
 [tools]
 node = "lts"
-python = "latest"
 go = "latest"
-hugo = "latest"
+"npm:claude-replay" = "latest"
+"github:rtk-ai/rtk" = "latest"
+hugo-extended = "latest"
+gh = "latest"
+jq = "latest"
+claude-code = "latest"
+supabase = "latest"
