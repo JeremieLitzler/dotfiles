@@ -40,7 +40,7 @@ Resolve the identifier to the matching `<REPO_ROOT>/summaries/YYYY-MM-DD-slug.md
 
 4. **Generate the article title** in the summary's language. It should read as a standalone blog title, not a session log title — it does **not** need to match the summary's H1. Confirm the title with the human, or use theirs if they gave one.
 
-   In the same breath, **ask which voice to write in**: first-person singular (*I / me / my*) or first-person plural (*we / us / our*). Apply the answer consistently throughout the article — never mix the two.
+   In the same breath, **ask which voice to write in**: first-person singular (*I / me / my*), first-person plural (*we / us / our*), or neutral third-person (a reportage voice, narrating what the named protagonists said and did — *Magali and Luc built…*, never *I* or *we*). The neutral voice fits summaries that are themselves an interview or report where the human isn't the protagonist — offer it explicitly as a third option rather than forcing a choice between *I* and *we*. Apply the chosen voice consistently throughout the article — never mix voices.
 
    And **ask for the publish date** (`YYYY-MM-DD`). The human decides when the article goes out, so never infer it: not from today's date, and not from the source summary's date. If they haven't given one, ask and wait for it.
 
