@@ -7,6 +7,8 @@ NEVER assume anything and ask questions to the human to make the intent is under
 ## About "→"
 
 NEVER use "→" in generated text. Use the regular ">" character.
+NEVER use "←" in generated text. Use the regular "<" character.
+NEVER use "↔" in generated text. Use the regular "<>" characters.
 
 <!-- rtk-instructions v2 -->
 
