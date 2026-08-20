@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: 'Structure a multi-round brainstorming project — a plan, a feasibility study, a supplier/technology comparison, a technical synthesis — as a versioned folder in the "my-claude-conversations" repo: context dossier, initial prompt, ONE living deliverable rewritten in place with a correction log, numbered feedback rounds, and reproducible calculation scripts. Works from ANY project and on Windows, Linux or macOS — locates the archive clone (data disk on Windows, home directory otherwise), cloning it first if missing. Use when the user opens a subject that needs research and several rounds of refinement ("dégrossir", "cadrer", "brainstorm", "plan", "I need a plan and questions to refine the need"), or asks to resume such a project.'
+description: Structure a multi-round brainstorming project — a plan, a feasibility study, a supplier/technology comparison, a technical synthesis — as a versioned folder in the "my-claude-conversations" repo: context dossier, initial prompt, ONE living deliverable rewritten in place with a correction log, numbered feedback rounds, and reproducible calculation scripts. Works from ANY project and on Windows, Linux or macOS — locates the archive clone (data disk on Windows, home directory otherwise), cloning it first if missing. Use when the user opens a subject that needs research and several rounds of refinement ("dégrossir", "cadrer", "brainstorm", "plan", "I need a plan and questions to refine the need"), or asks to resume such a project.
 tools: Bash, Read, Write, Edit, Glob, Grep, WebFetch, WebSearch
 ---
 
@@ -95,8 +95,17 @@ shape, not a straitjacket — drop sections that do not apply.
 
 Each round:
 
-1. The human writes `FEEDBACK-<D>-vN.md` (or gives feedback in chat — then write
-   it to the file yourself before answering, so the round is on record).
+1. **The round opens with feedback**, and it comes in one of two shapes:
+   - **A TODO round** — the human took the current `TODO-<SCOPE>-vN.md` away,
+     worked through it, and answers it point by point **by ID** (`A1`, `B3`) in
+     `FEEDBACK-<D>-vN.md`. This is the loop the TODO exists for.
+   - **A spontaneous round** — new material, a correction, a change of
+     direction, unrelated to the TODO.
+
+   Either way, if it came in chat, write it to the file yourself before
+   answering, so the round is on record. **Which of the two it is decides
+   whether the TODO re-versions** (§8) — a spontaneous round must not fork a
+   TODO nobody has answered.
 2. **Answer every point.** Number your answers to their numbering. When a point
    deserves a full treatment, give it a dedicated section in the deliverable and
    link to it from the version banner.
@@ -194,6 +203,16 @@ Track, as you work, everything the human will have to go and find out: a fact
 you could not verify, a decision that is theirs, an assumption you had to take,
 an action only they can carry out. This is the file they open the next morning.
 
+**The round trip — this is the whole point of the file.** The TODO goes out with
+the human; the answers come back as a `FEEDBACK-<D>-vN.md` replying to its
+questions **by ID**. That is why questions carry stable `A1`/`B3` IDs: so the
+feedback can be a numbered list of answers rather than a retelling. Write the
+TODO to be answerable that way. When it comes back, fold each answer where it
+belongs — a settled decision into the deliverable's *decisions not to reopen*
+table, a corrected fact into the section it invalidates — then rebuild the TODO
+with what is still open. **The answers never live in the TODO**: it is the
+outbound half of the loop of §4, the feedback file the inbound half.
+
 **End every response in a brainstorm session with one short line** stating what
 is pending and offering to write it down — then move on. One line, at the very
 end, no follow-up paragraph. It is an offer the human takes or ignores; never
@@ -207,16 +226,35 @@ items, and drop the line entirely when nothing is pending.
 > status) — want them in a TODO file?
 
 When they say yes, write `TODO-<SCOPE>-v<N>.md` — `<SCOPE>` is whose homework it
-is (`BACKEND`, `MAIRIE`, `PERSO`), `<N>` the deliverable version it accompanies.
-Use `assets/TODO.md`:
+is (`BACKEND`, `MAIRIE`, `PERSO`), `<N>` the TODO's **own** generation. Which
+deliverable version it accompanies goes in a line inside the file, not in the
+name. Use `assets/TODO.md`:
 
-- Questions **grouped by theme** and **numbered continuously**, each stating
-  what its answer changes. Prefix with a priority: 🔴 blocks design or costing ·
-  🟠 structural · 🟡 do not forget.
+- **Open the file with the instruction to answer it** — name the exact feedback
+  file to create (`FEEDBACK-<DELIVERABLE>-v<X>.md`) and say to reply by ID. The
+  human should never have to remember the convention, or wonder whether to
+  annotate the TODO itself.
+- Questions **grouped by theme under a heading**, each stating what its answer
+  changes. Prefix with a priority: 🔴 blocks design or costing · 🟠 structural ·
+  🟡 do not forget.
+- **Numbering restarts at 1 under every heading.** A heading ends the list;
+  markdown renderers restart the ordered list there whatever number you typed,
+  so a run continued across themes (`…9.`, `10.`) renders as `1.`, `2.` and
+  every cross-reference to it breaks. Reference questions by **theme letter +
+  number** — `A1`, `B3` — never by a bare number, and make the theme letter part
+  of the heading (`## A. Authentication`) so the ID is readable on the page.
 - A closing **"assumptions I took — invalidate if wrong"** list (`H1`, `H2`, …),
   saying which one you consider the most fragile.
-- On the next round, carry unresolved items into `TODO-<SCOPE>-v<N+1>.md` and
-  leave the old file in place — it records what got answered when.
+- **The TODO is a living file, like the deliverable — edit it in place.** Strike
+  what got settled, add what the round opened, re-prioritise. A round that
+  rewrites the deliverable does **not** create a TODO.
+- **A new version is created only by a TODO round** (§4.1) — a feedback file
+  that answers this TODO's questions. Then, and only then, freeze the answered
+  file next to the feedback that answered it — together they record what got
+  settled and when — and carry the unresolved items into `v<N+1>`. A single
+  answer dropped in passing mid-round is folded in place like any other edit. **Never fork a TODO the human has not worked through**: two
+  near-identical lists strand their annotations in the superseded one and force
+  a reconciliation that buys nothing.
 
 ## 9. Closing a round
 
