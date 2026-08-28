@@ -16,7 +16,7 @@
     "mattpocock-skills@claude-plugins-official": true
   },
   "agentPushNotifEnabled": true,
-  "inputNeededNotifEnabled": true
+  "inputNeededNotifEnabled": true,
   "hooks": {
     "UserPromptSubmit": [
       {
