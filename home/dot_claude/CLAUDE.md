@@ -12,7 +12,7 @@ NEVER assume anything and ask questions to the human to make the intent is under
 
 ## About line wrapping
 
-NEVER hard-wrap markdown prose at ~80 characters. Write each paragraph, list item, table row, and blockquote line as ONE line and let the editor soft-wrap. Leave fenced code blocks (including mermaid) exactly as authored.
+No hard-wrap markdown prose at ~80 characters. Write each paragraph, list item, table row, and blockquote line as ONE line and let the editor soft-wrap. Leave fenced code blocks (including mermaid) exactly as authored.
 
 <!-- rtk-instructions v2 -->
 
