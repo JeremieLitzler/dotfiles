@@ -139,6 +139,10 @@ rtk init --global       # Add RTK to ~/.claude/CLAUDE.md
 - **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
 When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` before doing anything else.
 
+# grilling-rounds
+- **grilling-rounds** (`~/.claude/skills/grilling-rounds/SKILL.md`) - a grilling session's rounds go to files, not chat.
+Any grilling session records its rounds in files, never in chat. Immediately after invoking `mattpocock-skills:grilling` — directly, or via `/grill-me` or `/grill-with-docs` — invoke the Skill tool with `skill: "grilling-rounds"`, before producing any output.
+
 <!-- CODEGRAPH_START -->
 ## CodeGraph
 
