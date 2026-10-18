@@ -28,8 +28,8 @@ bash ~/.claude/skills/brainstorm/scripts/locate-brainstorm.sh "<slug>"
   `/e/Git/GitHub`, `$HOME`; Linux and macOS: `$HOME`, `$HOME/Git/GitHub`,
   `$HOME/git`. Setting `BRAINSTORM_REPO=/path/to/my-claude-conversations`
   overrides the search.
-- If a folder ending in `-<slug>` already exists under `prompts/`, it is
-  **reused** (resume mode); otherwise it creates `prompts/YYYY-MM-DD-<slug>/`.
+- If a folder ending in `-<slug>` already exists under `conversations/`, it is
+  **reused** (resume mode); otherwise it creates `conversations/YYYY-MM-DD-<slug>/`.
 - It prints `REPO_ROOT=`, `BRAINSTORM_DIR=`, `MODE=new|resume`, and in resume
   mode an inventory of the files already there.
 
@@ -43,7 +43,7 @@ them.
 ## 2. Files
 
 ```
-prompts/YYYY-MM-DD-slug/
+conversations/YYYY-MM-DD-slug/
   CONTEXTE.md            durable facts, initial context — optional but usually right
   INITIAL-PROMPT.md      the ask
   PLAN.md                THE deliverable — name it for what it is

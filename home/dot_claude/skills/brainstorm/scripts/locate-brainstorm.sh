@@ -9,8 +9,8 @@
 #        Linux / macOS      : $HOME, $HOME/Git/GitHub, $HOME/git
 #      $BRAINSTORM_REPO overrides everything when set.
 #   2. Clone it into the first candidate whose filesystem root exists.
-#   3. Reuse prompts/*-<slug>/ if such a folder already exists (resume mode),
-#      otherwise create prompts/YYYY-MM-DD-<slug>/ (new mode).
+#   3. Reuse conversations/*-<slug>/ if such a folder already exists (resume mode),
+#      otherwise create conversations/YYYY-MM-DD-<slug>/ (new mode).
 #   4. Print REPO_ROOT=, BRAINSTORM_DIR=, MODE=, and — in resume mode — an
 #      inventory of what is already in the folder.
 #
@@ -89,11 +89,11 @@ if [ -z "$repo" ]; then
   exit 1
 fi
 
-mkdir -p "$repo/prompts"
+mkdir -p "$repo/conversations"
 
 # --- 3. reuse an existing folder for this slug, else create today's --------
 dir=""
-for candidate in "$repo/prompts"/*-"$slug"; do
+for candidate in "$repo/conversations"/*-"$slug"; do
   if [ -d "$candidate" ]; then
     dir="$candidate"
     break
@@ -104,7 +104,7 @@ if [ -n "$dir" ]; then
   mode="resume"
 else
   mode="new"
-  dir="$repo/prompts/$(date +%Y-%m-%d)-$slug"
+  dir="$repo/conversations/$(date +%Y-%m-%d)-$slug"
   mkdir -p "$dir"
 fi
 

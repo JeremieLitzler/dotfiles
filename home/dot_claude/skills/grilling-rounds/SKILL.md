@@ -20,13 +20,13 @@ Do this once, before writing round v01.
 
 | Condition | Directory |
 | --- | --- |
-| `prompts/` exists | `prompts/YYYY-MM-DD-<slug>/` |
+| `conversations/` exists | `conversations/YYYY-MM-DD-<slug>/` |
 | else `docs/` exists | `docs/grillings/YYYY-MM-DD-<slug>/` |
 | else | `grilling-sessions/YYYY-MM-DD-<slug>/` |
 
 `YYYY-MM-DD` is the session's **start** date, fixed at v01 and never recomputed — even if the session resumes days later.
 
-Outside a git repository, the destination is the `my-claude-conversations` archive instead. Locate it the way `save-session` does: look for the clone under `D:/Git/GitHub` or `E:/Git/GitHub`, cloning it there if missing. It has a `prompts/`, so rounds land in `<archive>/prompts/YYYY-MM-DD-<slug>/`.
+Outside a git repository, the destination is the `my-claude-conversations` archive instead. Locate it the way `save-session` does: look for the clone under `D:/Git/GitHub` or `E:/Git/GitHub`, cloning it there if missing. It has a `conversations/`, so rounds land in `<archive>/conversations/YYYY-MM-DD-<slug>/`.
 
 **2. Derive the slug** from the conversation — the subject or feature being grilled, kebab-cased. Ask for it outright only when there is nothing to derive from.
 
