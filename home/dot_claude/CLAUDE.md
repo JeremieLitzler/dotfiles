@@ -14,6 +14,10 @@ NEVER assume anything and ask questions to the human to make the intent is under
 
 No hard-wrap markdown prose at ~80 characters. Write each paragraph, list item, table row, and blockquote line as ONE line and let the editor soft-wrap. Leave fenced code blocks (including mermaid) exactly as authored.
 
+## About branches
+
+Before any work that changes a file in a repository, check out a new branch cut from the up-to-date default branch, and commit there. `main` only moves through a merged pull request. If the current branch is `main` when a change is about to be made, branch first.
+
 <!-- rtk-instructions v2 -->
 
 ## RTK (Rust Token Killer) - Token-Optimized Commands
