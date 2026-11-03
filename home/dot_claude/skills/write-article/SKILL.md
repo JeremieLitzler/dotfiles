@@ -75,6 +75,8 @@ The article must read as if a human wrote it. The tells below are what give away
 
 **Code fences always name a language.** A block with no known programming language uses `plaintext`, never a bare fence. So ` ```plaintext ` rather than ` ``` `.
 
+**English headings use Title Case.** In an English article, capitalize most words of every `##` and `###` heading, as `assets/_english-example.md` does ("Starting Point", "Modifying the Pipelines"). Keep short articles, conjunctions and prepositions lowercase unless they open the heading, e.g. `## What Is Inside the Box`, not `## What is inside the box`. French articles follow `assets/_french-example.md` instead.
+
 **No arrows.** Use `>` where you'd be tempted to write `→` — in navigation breadcrumbs, mappings, or anywhere else. For example, `Pipelines > Environments > ⋮ > Security`.
 
 **No bold lead-ins in bullet lists.** A bullet that opens with a bolded noun phrase followed by a period or colon is the strongest tell there is. Either fold that phrase into the sentence, or drop the bold. Bold may still be used mid-sentence for genuinely key terms.
