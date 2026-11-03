@@ -10,13 +10,17 @@ NEVER assume anything and ask questions to the human to make the intent is under
 - NEVER use "←" in generated text. Use the regular "<" character.
 - NEVER use "↔" in generated text. Use the regular "<>" characters.
 
+## About horizontal rules ("---")
+
+NEVER put `---` between paragraphs or sections in generated markdown. Azure DevOps wikis render a `---` that directly follows a text line as a level 2 heading, so separators break the wiki copy of the document. Use headings to separate sections. Leave YAML front matter and fenced code blocks exactly as authored.
+
 ## About line wrapping
 
 No hard-wrap markdown prose at ~80 characters. Write each paragraph, list item, table row, and blockquote line as ONE line and let the editor soft-wrap. Leave fenced code blocks (including mermaid) exactly as authored.
 
-## About branches
+## About horizontal rules ("---")
 
-Before any work that changes a file in a repository, check out a new branch cut from the up-to-date default branch, and commit there. `main` only moves through a merged pull request. If the current branch is `main` when a change is about to be made, branch first.
+NEVER put `---` between paragraphs or sections in generated markdown. Azure DevOps wikis render a `---` that directly follows a text line as a level 2 heading, so separators break the wiki copy of the document. Use headings to separate sections. Leave YAML front matter and fenced code blocks exactly as authored.
 
 <!-- rtk-instructions v2 -->
 
@@ -157,3 +161,7 @@ In repositories indexed by CodeGraph (a `.codegraph/` directory exists at the re
 
 If there is no `.codegraph/` directory, skip CodeGraph entirely — indexing is the user's decision.
 <!-- CODEGRAPH_END -->
+
+## About "reporter" (carrying over)
+
+When the user says "reporter" (carry over) actions, questions or any item from one document to another, it means CUT and PASTE: move the full text to the destination AND delete it from the source. NEVER duplicate it. If the source needs a trace, ask first.
