@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: file-update-truncated-paste
+expected_outcome: |
+  The summary is inserted under # Summary in how-to-prioritize-smarter-and-get-better-results.md, covers the full article from the file (including sections 4 and 5 that the paste omitted), leaves the rest of the file unchanged, is echoed in chat, and mentions that the paste was truncated.
+context:
+  scaffold_script: place-files.sh

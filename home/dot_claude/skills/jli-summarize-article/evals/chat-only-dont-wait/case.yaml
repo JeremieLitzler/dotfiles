@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: chat-only-dont-wait
+expected_outcome: |
+  The summary is given in chat only (no file created), with a ### Key point paragraph and a ### Checklist of - [ ] items covering the article's recommendations.

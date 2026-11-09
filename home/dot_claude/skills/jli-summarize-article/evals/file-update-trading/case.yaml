@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: file-update-trading
+expected_outcome: |
+  The summary is inserted under # Summary in how-i-trade-stocks-for-fun-and-profit.md with the author's specifics (90/10 rule, ~10% stop-loss, 2 weeks, 20% gain, 12 quarters), rest of file unchanged, and echoed in chat.
+context:
+  scaffold_script: place-files.sh
