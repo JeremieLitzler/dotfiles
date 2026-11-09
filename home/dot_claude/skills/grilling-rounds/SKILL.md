@@ -6,9 +6,9 @@ tools: Bash, Read, Write, AskUserQuestion
 
 # Grilling Rounds
 
-A grilling session records its rounds **in files**, never in chat. The user answers in their own editor, at their own pace, and the whole series is committed as the record of what was decided and why.
+A grilling session records its rounds **in files** instead of the chat. The user answers in their own editor, at their own pace. The round files are the working medium, not the record: once the grilling is settled they are deleted and `GRILLING-SUMMARY.md` stays as the record of what was decided and why.
 
-`grilling` shows a chat template ("Format a round like so: ❓ **Q1** …"). **Ignore it.** Its *method* — design tree, frontier, one round at a time, a recommendation on every question, finding facts yourself — is unchanged and governs everything below. Only the destination changes: rounds go to files, and the chat gets one line.
+Ignore `grilling` chat template ("Format a round like so: ❓ **Q1** …"). Keep its *method* — design tree, frontier, one round at a time, a recommendation on every question, finding facts yourself. Only the destination changes: rounds go to files, and the chat gets one line.
 
 This skill is invoked **immediately after** `grilling`, in the same turn, before producing any output. It never invokes `grilling` itself, and it never chooses the grill variant — `/grill-me` or `/grill-with-docs` has already decided that by the time this runs.
 
@@ -32,7 +32,9 @@ Outside a git repository, the destination is the `my-claude-conversations` archi
 
 **3. Confirm in one `AskUserQuestion` call** carrying two questions: the directory (all three options, detected one first) and the slug. Outside a repo there is nothing to choose, so drop the directory question and ask only the slug, stating the destination in it.
 
-**4. If the chosen folder already exists** and contains `GRILLING-ROUND-*.md`, **resume it** — never create a new one. Read every round file in order, rebuild what is settled from the user's actual answers, and continue at the next number.
+**4. If the chosen folder already exists** and contains `GRILLING-ROUND-*.md`, **resume it** to avoid duplicate. Read every round file in order, rebuild what is settled from the user's actual answers, and continue at the next number.
+
+If the folder holds only `GRILLING-SUMMARY.md` (the rounds were deleted), that session is settled. Do not resume it: tell the user, and start a new folder only if they want to reopen the topic.
 
 ## Writing a round
 
@@ -40,7 +42,7 @@ One file per round: `GRILLING-ROUND-vNN.md`, zero-padded, starting at `v01`. **N
 
 Write it in **the language the user is writing in**, fixed at v01 and held for the whole session. Technical terms stay in English.
 
-Each file carries, in this order:
+Each round file carries, in this order:
 
 1. `# Grilling round vNN — <subject>`
 2. `## Settled in vNN-1` — what the previous round's answers closed, one line each. This is where the user catches a misread answer, so state the decision as you understood it, not just the option letter.
@@ -59,7 +61,7 @@ Each question takes this shape:
 ### Answer to Q<n>
 ```
 
-Leave the answer heading empty. The user writes under it; everything from that heading to the next `##` or `---` is their answer, so they can use paragraphs, lists and code blocks freely.
+Leave the answer heading empty. The user writes under it; everything from that heading to the next `##` is their answer, so they can use paragraphs, lists and code blocks freely.
 
 **Numbering is continuous across the whole session** — v01 has Q1–Q4, v02 continues at Q5. Letter suffixes (`Q30`, `Q30b`) are reserved for a re-ask pair, so a question and the decision it reopens read as linked.
 
@@ -91,18 +93,20 @@ Recompute the frontier and write the next round file.
 
 When `grill-with-docs` ran, `domain-modeling` is active and produces ADRs and a glossary. Those are **in addition to** the round files, never a replacement: a round file records a decision *being made*, an ADR records it *once made*.
 
-They live in different places. ADRs and `CONTEXT.md` go wherever `domain-modeling` normally puts them — the repo's own doc layout. The session folder holds only rounds and the summary, and links out to them. If the repo has no doc layout, say so and offer a fallback rather than inventing one.
+They live in different places. ADRs and `CONTEXT.md` go wherever `domain-modeling` normally puts them — the repo's own doc layout. The session folder holds only rounds (until they are deleted) and the summary, and links out to them. If the repo has no doc layout, say so and offer a fallback rather than inventing one.
 
 ## Ending
 
 When the frontier is empty, write `GRILLING-SUMMARY.md` in the session folder **first**, in three parts:
 
 1. **Prose restatement** of the shared understanding — what a reader needs six months later, including *why* things changed from the starting proposal.
-2. **Decision index** — a flat list, one line per decision: the question number, the round it was settled in, and the decision. **Never a table**; column widths make it unreadable in a Markdown editor. Close it with a line naming which questions were superseded, and by what.
-3. **A paste-ready section** for wherever the outcome belongs — the issue, the ticket, the PR — written in the user's voice, since they will paste it under their own name.
+2. **Decision index** — a flat list, instead of a table for readability, in a Markdown editor, with one line per decision: the question number, the round it was settled in, and the decision.
+3. **Rejected alternatives** — a flat list, for readability, one line per option that lost: the question number, the option, and the reason it lost, in the user's words where they gave one. This is the only trace of the rounds once they are deleted, so keep every option the user actually weighed; skip options that were never seriously contested.
 
 Flag anything that was never grilled but had to be decided to produce the artefact, so the user can object before it exists.
 
-Then write the final round file with **one** question: does the summary match your understanding? Corrections edit `GRILLING-SUMMARY.md` in place and do not open a new round, unless a correction reopens a real decision.
+Then write to chat **one** question: does the summary match your understanding? Corrections edit `GRILLING-SUMMARY.md` in place and do not open a new round, unless a correction reopens a real decision.
+
+**Once the user confirms the summary matches, delete every `GRILLING-ROUND-*.md` in the session folder** and leave `GRILLING-SUMMARY.md` alone. If a correction reopens a decision, keep the rounds and continue the loop; delete only when the confirmation is clean. Tell the user in one line that the rounds were deleted.
 
 The job ends there. Producing a spec, tickets, or the implementation is a separate ask — `to-spec`, `to-tickets` and `implement` exist for that. Name them as the next moves and stop.
