@@ -1,4 +1,4 @@
-Create a pull request from the current branch, evaluate its contents, and merge after human approval.
+Create a pull request from the current branch after evaluating its contents with the human. Merging is `/close-pr`.
 
 **Usage:** `/open-pr`
 
@@ -44,9 +44,11 @@ Files changed:
 Summary: <one-sentence purpose>
 ```
 
+Take the issue number from the branch name (`docs/8-state-management` gives #8) and add to the evaluation: `Issue link: Closes #N or Refs #N?`. With no number in the branch name, ask which issue, if any.
+
 ## Step 3 — Human review: pre-check PR to create
 
-Wait for explicit approval or corrections before proceeding to Step 4. Apply any changes the user requests to the draft title/body.
+Wait for explicit approval or corrections, including the issue link keyword, before proceeding to Step 4. Apply any changes the user requests to the draft title/body.
 
 ## Step 4 — Create the pull request
 
@@ -68,32 +70,13 @@ rtk gh pr create \
 
 ## Test plan
 
-- [ ] All existing tests pass
-- [ ] Output CSVs and README verified manually for the target year
+- [ ] <checks derived from the diff>
+
+<Closes|Refs> #N
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 EOF
 )"
 ```
 
-Report the PR URL to the user.
-
-## Step 5 — Human review: PR
-
-Wait for explicit approval before proceeding to Step 6. If the user requests changes to the PR description or needs additional commits, apply them and repeat this step.
-
-## Step 6 — Merge and sync local main
-
-Run:
-
-```bash
-rtk gh pr merge --rebase --delete-branch
-```
-
-Then pull main locally:
-
-```bash
-rtk git checkout main && rtk git pull
-```
-
-Report the merge commit hash and confirm the branch was deleted.
+Report the PR URL to the user and stop. Merging is `/close-pr`.
