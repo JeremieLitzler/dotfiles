@@ -21,7 +21,7 @@ gh pr checks <n>
 The merge happens only when CI is green: every check reports `pass` (skipped checks do not count against it). Treat anything else as not green and stop without merging:
 
 - a check that is failing, cancelled or still pending (it will finish on its own, so report that rather than merging over it);
-- no checks reported at all (`gh pr checks` says none): ask the user rather than assume green;
+- no checks reported at all (`gh pr checks` says none): if the repo has no `.github/workflows/`, there is no CI to wait for, so merge; otherwise ask the user rather than assume green;
 - a PR that is not open or not mergeable.
 
 Say which check blocked the merge, with its link. Never work around it: no `--admin`, no `--auto` (which merges later without re-checking), and no re-running a failed check to get a pass unless the user asks.
