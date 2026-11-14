@@ -44,7 +44,7 @@ Files changed:
 Summary: <one-sentence purpose>
 ```
 
-Take the issue number from the branch name (`docs/8-state-management` gives #8) and add to the evaluation: `Issue link: Closes #N or Refs #N?`. With no number in the branch name, ask which issue, if any.
+Take the issue number from the branch name (`docs/8-state-management` gives #8) and add to the evaluation: `Issue link: Closes #N`. Use `Refs #N` only when the user says so or that the work clearly requires another issue to complete. With no number in the branch name, ask which issue, if any. The PR body always ends with the issue link line when there is an issue.
 
 ## Step 3 — Human review: pre-check PR to create
 
