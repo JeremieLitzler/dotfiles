@@ -26,25 +26,18 @@ No hard-wrap markdown prose at ~80 characters. Write each paragraph, list item, 
 
 Prefix every `git` and `gh` command with `rtk`, in chains too: `rtk git add . && rtk git commit -m "msg"`.
 
+Known `rtk` quirks:
+
+- Read comments with `rtk gh issue view N --json title,body,comments` because `rtk gh issue view N --comments` doesn't work.
+- `rtk git commit` may exit 128 with "fatal: Needed a single revision" although the commit worked. When the output prints the new commit hash, treat it as noise.
+
 <!-- /rtk-instructions -->
-# graphify
-- **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
-When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` before doing anything else.
 
 # grilling-rounds
-- **grilling-rounds** (`~/.claude/skills/grilling-rounds/SKILL.md`) - a grilling session's rounds go to files, not chat.
+
+Found (`~/.claude/skills/grilling-rounds/SKILL.md`) writes a grilling session's rounds go to files, not chat.
+
 Any grilling session records its rounds in files, never in chat. Immediately after invoking `mattpocock-skills:grilling` — directly, or via `/grill-me` or `/grill-with-docs` — invoke the Skill tool with `skill: "grilling-rounds"`, before producing any output.
-
-<!-- CODEGRAPH_START -->
-## CodeGraph
-
-In repositories indexed by CodeGraph (a `.codegraph/` directory exists at the repo root), reach for it BEFORE grep/find or reading files when you need to understand or locate code:
-
-- **MCP tool** (when available): `codegraph_explore` answers most code questions in one call — the relevant symbols' verbatim source plus the call paths between them, including dynamic-dispatch hops grep can't follow. Name a file or symbol in the query to read its current line-numbered source. If it's listed but deferred, load it by name via tool search.
-- **Shell** (always works): `codegraph explore "<symbol names or question>"` prints the same output.
-
-If there is no `.codegraph/` directory, skip CodeGraph entirely — indexing is the user's decision.
-<!-- CODEGRAPH_END -->
 
 ## About "reporter" (carrying over)
 
