@@ -15,12 +15,14 @@ Use the PR number the user gave. Without one, use the PR of the current branch (
 
 ```bash
 gh pr view <n> --json state,headRefName,mergeable
-gh pr checks <n>
+gh pr checks <n> --watch --fail-fast
 ```
+
+Run the `gh pr checks` line in the background (`run_in_background`) and wait for its exit notification instead of polling `gh pr checks` or `gh pr view --json state` in a loop.
 
 The merge happens only when CI is green: every check reports `pass` (skipped checks do not count against it). Treat anything else as not green and stop without merging:
 
-- a check that is failing, cancelled or still pending (it will finish on its own, so report that rather than merging over it);
+- a check that is failing or cancelled;
 - no checks reported at all (`gh pr checks` says none): if the repo has no `.github/workflows/`, there is no CI to wait for, so merge; otherwise ask the user rather than assume green;
 - a PR that is not open or not mergeable.
 
