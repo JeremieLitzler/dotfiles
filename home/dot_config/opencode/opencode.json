@@ -1,0 +1,29 @@
+{
+  "permissions": [
+    {
+      "action": "shell",
+      "resource": "bash ~/.claude/skills/save-session/scripts/save-session.sh *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "gh pr create *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "rtk gh pr create *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "gh issue comment *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "rtk gh issue comment *",
+      "effect": "allow"
+    }
+  ]
+}
