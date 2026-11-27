@@ -23,12 +23,9 @@ scoop install git
 scoop install main/chezmoi
 
 # --- Install Proton Pass CLI ---
-Invoke-WebRequest -Uri https://proton.me/download/pass-cli/install.ps1 -OutFile install-passcli.ps1
-.\install-passcli.ps1
-Remove-Item install-passcli.ps1 -ErrorAction SilentlyContinue
-# Add pass-cli to current session PATH
-$env:Path += ";$env:USERPROFILE\AppData\Local\Programs\ProtonPass"
-[Environment]::SetEnvironmentVariable('Path', $env:Path + ";$env:USERPROFILE\AppData\Local\Programs\ProtonPass", 'User')
+scoop bucket add main
+scoop install main/proton-pass-cli
+pass-cli login
 
 # --- Authenticate with Proton Pass ---
 Write-Host ""
