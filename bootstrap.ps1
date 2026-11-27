@@ -36,5 +36,7 @@ Write-Host "==========================================" -ForegroundColor Yellow
 Write-Host ""
 pause
 
+pass-cli session create-lock
+
 # --- Init chezmoi and apply dotfiles ---
 chezmoi init --apply JeremieLitzler/dotfiles
