@@ -13,4 +13,7 @@ alias cd-github='cd /e/Git/GitHub'
 # Alias for tools
 alias cmcd='chezmoi cd'
 alias cmadd='chezmoi add'
-
+alias cmup='chezmoi update'
+alias cmapply='chezmoi apply'
+alias proton-lock='pass-cli session lock'
+alias proton-unlock='pass-cli session unlock'
