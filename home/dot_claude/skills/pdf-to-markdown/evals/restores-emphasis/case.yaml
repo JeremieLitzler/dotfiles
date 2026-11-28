@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: restores-emphasis
+expected_outcome: |
+  new-sdlc-note.md gains the PDF's body-text emphasis: bold run-in labels (The model, Tools:, The Action:, In the editor:, ...), bold list-item openers in Where to start and the Conclusion, bold terms (Static context, Agent Skills, Agents CLI, token economy), italic words (evals, context, upfront, demand, how, why) and the italic closing line. No emphasis the PDF lacks is added, and no other text changes.
+context:
+  scaffold_script: place-files.sh

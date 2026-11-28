@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: extracts-diagrams-without-note
+expected_outcome: |
+  A figures/ folder holding exactly the ten content images (figures 1-9 and the equation image), named fig-NN-<slug>.png without prefix, and no markdown file created or edited.

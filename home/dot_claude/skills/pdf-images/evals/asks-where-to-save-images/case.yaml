@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: asks-where-to-save-images
+expected_outcome: |
+  Before writing any image, the response asks numbered questions with lettered suggested options about where to save the images (e.g. next to the note, an images/ subfolder, the PDF folder), a filename prefix, and the embed syntax.
+context:
+  scaffold_script: place-files.sh

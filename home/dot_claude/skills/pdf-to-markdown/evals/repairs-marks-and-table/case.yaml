@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: repairs-marks-and-table
+expected_outcome: |
+  new-sdlc-note.md gets <sup>2</sup>, <sup>11</sup>, <sup>14</sup>, <sup>15</sup>, <sup>16</sup> in place of the garbled glyphs, gains the dropped <sup>7</sup> and <sup>8</sup> in the Implementation section, and Table 1's Error handling and Risk profile rows are restored to match page 13. Everything else in the note is unchanged and no figures are extracted.
+context:
+  scaffold_script: place-files.sh

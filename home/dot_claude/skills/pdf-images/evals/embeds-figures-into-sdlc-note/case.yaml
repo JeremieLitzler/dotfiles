@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: embeds-figures-into-sdlc-note
+expected_outcome: |
+  Ten PNGs (figures 1-9 and the Agent = Model + Harness equation) saved in images/ next to the note, named new-sdlc-fig-NN-<slug>.png (equation named from its content). Each embedded with ![[...]] directly above its italic caption; the equation placeholder replaced by its embed. Reference marks and tables are left untouched (they belong to /pdf-to-markdown). No cover, TOC background or icon images saved.
+context:
+  scaffold_script: place-files.sh
